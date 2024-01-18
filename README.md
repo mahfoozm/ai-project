@@ -60,19 +60,3 @@ Adjust these if your going to deploy to any remote server.
 
 - Note that this project only allows MP4, and MP3 format files. 
 - Additional Notes Make sure ffmpeg is installed on your machine and available on your system's PATH
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
-
-## Contributing
-
-Contributions are always welcome!
-
-Open a PR or an issue for extra features and bug fixes.
-
-## Authors
-
-- [@ali-h-kudeir](https://www.github.com/ali-h-kudeir)
-
