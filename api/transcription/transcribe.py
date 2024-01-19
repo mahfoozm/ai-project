@@ -1,6 +1,5 @@
 import os
 from django.core.files.storage import default_storage
-import io
 from pydub import AudioSegment
 from asgiref.sync import sync_to_async
 from openai import OpenAI

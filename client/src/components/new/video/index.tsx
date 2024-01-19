@@ -43,12 +43,12 @@ export default function Video({ file, transformLoading }: Props) {
         <div className="mb-2 text-sm">Transcript</div>
         <p className="text-sm">{file.transcript}</p>
       </div>
-      <button
+      {/* <button
         onClick={() => copyToClipboard(file?.transcript)}
         className="bg-slate-800 hover:bg-slate-700 text-sm text-white py-1 px-2 rounded transition duration-500 ease-in-out"
       >
         Copy
-      </button>
+      </button> */}
       <button
         onClick={downloadTranscript}
         className="bg-slate-800 hover:bg-slate-700 text-sm text-white py-1 px-2 rounded transition duration-500 ease-in-out ml-2"
