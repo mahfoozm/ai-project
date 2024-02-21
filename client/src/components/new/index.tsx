@@ -4,7 +4,7 @@ import Loading from '../loading';
 import Form from './form';
 import { AppContext } from '../../providers/new-provider';
 import Video from './video';
-import disclaimerImage from '../../assets/uoft.png'; // Replace with the actual path to your image
+import disclaimerImage from '../../assets/uoft.png';
 
 function DisclaimerPopup({ onClose }) {
   return (

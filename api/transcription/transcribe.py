@@ -1,13 +1,14 @@
 import os
 from django.core.files.storage import default_storage
+import whisper
 from pydub import AudioSegment
 from asgiref.sync import sync_to_async
-from openai import OpenAI
+
 
 from .serializers import FileSerializer
 from .models import File
 
-client = OpenAI()
+model = whisper.load_model("base.en")
 
 class Transcribe:
 
@@ -25,19 +26,11 @@ class Transcribe:
     @sync_to_async
     def transcribe_file(self, file_id):
         file = File.objects.filter(id=file_id).first()
-        if not file:
+        if (not file):
             return None
-
-        audio_file_path = default_storage.path(file.file.name)
-        audio_file = open(audio_file_path, 'rb') 
-
-        transcription = client.audio.transcriptions.create(
-            model="whisper-1", 
-            file=audio_file,
-            response_format="text"
-        )
-
-        file.transcript = transcription
+        audio_file = Transcribe.get_audio_file(file);
+        transcription = model.transcribe(audio_file)
+        file.transcript = transcription['text'].strip()
         file.save()
         data = FileSerializer(file).data
         return data

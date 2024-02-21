@@ -18,11 +18,15 @@ from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
+from transcription import views
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path(r'api/transcription/', include(('transcription.urls'))),
+    path('answer/', views.answer_question, name='answer_question'),
+    path('summarize/', views.summarize, name="summarize"),
+    path('action_items/', views.action_items, name="action_items")
 ]
 
 
