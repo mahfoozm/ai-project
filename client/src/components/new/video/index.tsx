@@ -28,22 +28,35 @@ export default function Video({ file, transformLoading }: Props) {
   const isVideo = file?.file.endsWith('.mp4');
   const src = file?.file.startsWith('/') ? ROOT_URL + file.file : file?.file;
 
-  const downloadTranscript = () => {
-    const transcriptText = `Transcript:\n${file.transcript}\n\n`;
-    const summaryText = summary ? `Summary:\n${summary}\n\n` : '';
-    const actionItemsText = actionItems ? `Action Items:\n${actionItems}\n\n` : '';
-
-    const combinedText = transcriptText + summaryText + actionItemsText;
-
-    const blob = new Blob([combinedText], { type: 'text/plain' });
+  const downloadFile = (content: string, filename: string) => {
+    const blob = new Blob([content], { type: 'text/plain' });
     const link = document.createElement('a');
 
     link.href = URL.createObjectURL(blob);
-    link.download = 'transcript.txt';
+    link.download = filename;
 
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const downloadTranscript = () => {
+    const transcriptText = `Transcript:\n${file.transcript}\n`;
+    downloadFile(transcriptText, 'transcript.txt');
+  };
+
+  const downloadSummary = () => {
+    if (summary) {
+      const summaryText = `Summary:\n${summary}\n`;
+      downloadFile(summaryText, 'summary.txt');
+    }
+  };
+
+  const downloadActionItems = () => {
+    if (actionItems) {
+      const actionItemsText = `Action Items:\n${actionItems}\n`;
+      downloadFile(actionItemsText, 'action_items.txt');
+    }
   };
 
   const askQuestion = async () => {
@@ -142,12 +155,26 @@ export default function Video({ file, transformLoading }: Props) {
           <p className="text-sm">{answer}</p>
         </div>
       )}
-      <button
-        onClick={downloadTranscript}
-        className="bg-slate-800 hover:bg-slate-700 text-sm text-white py-1 px-2 rounded transition duration-500 ease-in-out ml-2"
-      >
-        Download
-      </button>
+      <div className="flex space-x-2">
+        <button
+          onClick={downloadTranscript}
+          className="bg-slate-800 hover:bg-slate-700 text-sm text-white py-1 px-2 rounded transition duration-500 ease-in-out"
+        >
+          Download Transcript
+        </button>
+        <button
+          onClick={downloadSummary}
+          className="bg-slate-800 hover:bg-slate-700 text-sm text-white py-1 px-2 rounded transition duration-500 ease-in-out"
+        >
+          Download Summary
+        </button>
+        <button
+          onClick={downloadActionItems}
+          className="bg-slate-800 hover:bg-slate-700 text-sm text-white py-1 px-2 rounded transition duration-500 ease-in-out"
+        >
+          Download Action Items
+        </button>
+      </div>
     </div>
   );
 }
