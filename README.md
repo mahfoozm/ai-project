@@ -1,12 +1,7 @@
 
 # Video/Audio Transcriber
 
-An OpenAI's Whisper-based full-stack project to transcribe audio and video files using React & Django.
-
-
-## Demo
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/119813438/213866880-486c1f85-c139-4c56-8dc8-98a0398ec674.gif)
-
+OpenAI Whisper-based project to transcribe audio and video files using React & Django
 
 ## Installation
 
